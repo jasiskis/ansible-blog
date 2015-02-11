@@ -1,0 +1,6 @@
+#Create the instance
+- hosts: localhost
+  connection: local
+  gather_facts: false
+  roles:
+    - ec2_creation

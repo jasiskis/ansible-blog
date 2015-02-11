@@ -1,0 +1,17 @@
+---
+- name: Create instance
+  ec2:
+    region: sa-east-1
+    zone: sa-east-1a
+    keypair: admin    
+    instance_type: t2.small
+    image: ami-af9925b2    
+    vpc_subnet_id: subnet-5d698f38
+    group: app
+    assign_public_ip: true    
+    count: 1    
+    profile: midea
+    wait: yes    
+    instance_tags:
+      Name: "blog" 
+  register: ec2
