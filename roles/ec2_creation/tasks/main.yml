@@ -14,4 +14,17 @@
     wait: yes    
     instance_tags:
       Name: "blog" 
-  register: ec2
+  register: ec2_instances
+
+- name: Debug instances 
+  debug: msg="{{ ec2_instances }}"
+
+
+- name: Wait for SSH to come up
+  wait_for: host={{ item.public_ip }} port=22 delay=120 timeout=320 state=started 
+  with_items: ec2_instances.instances  
+
+- name: Add new instance to host group
+  add_host: hostname={{ item.public_ip }} groupname=ec2hosts  
+  with_items: ec2_instances.instances
+

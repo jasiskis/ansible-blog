@@ -4,3 +4,9 @@
   gather_facts: false
   roles:
     - ec2_creation
+
+#Provisioning the Instance
+- hosts: ec2hosts
+  remote_user: ec2-user
+  gather_facts: true
+  sudo: yes
